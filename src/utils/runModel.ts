@@ -12,6 +12,10 @@ export async function createModelGpu(model: ArrayBuffer): Promise<InferenceSessi
   init();
   return await InferenceSession.create(model, {executionProviders: ['webgl']});
 }
+export async function createModelWebnn(model: ArrayBuffer, devicePreference: number = 0): Promise<InferenceSession> {
+  init();
+  return await InferenceSession.create(model, {executionProviders: ['wasm', {name: 'webnn', devicePreference: devicePreference}]});
+}
 
 export async function warmupModel(model: InferenceSession, dims: number[]) {
   // OK. we generate a random input and call Session.run() as a warmup query

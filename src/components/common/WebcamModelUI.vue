@@ -168,6 +168,8 @@ export default class WebcamModelUI extends Vue {
   session: InferenceSession;
   gpuSession: InferenceSession | undefined;
   cpuSession: InferenceSession | undefined;
+  webnnGpuSession: InferenceSession | undefined;
+  webnnCpuSession: InferenceSession | undefined;
 
   modelLoading: boolean;
   modelInitializing: boolean;
@@ -210,6 +212,8 @@ export default class WebcamModelUI extends Vue {
     this.backendSelectList = [
       { text: "GPU-WebGL", value: "webgl" },
       { text: "CPU-WebAssembly", value: "wasm" },
+      { text: "GPU-WebNN", value: "webnn_gpu" },
+      { text: "CPU-WebNN", value: "webnn_cpu" },
     ];
   }
 
@@ -250,6 +254,22 @@ export default class WebcamModelUI extends Vue {
       this.modelLoading = true;
       this.modelInitializing = true;
     }
+    if (this.sessionBackend === "webnn_gpu") {
+      if (this.webnnGpuSession) {
+        this.session = this.webnnGpuSession;
+        return;
+      }
+      this.modelLoading = true;
+      this.modelInitializing = true;
+    }
+    if (this.sessionBackend === "webnn_cpu") {
+      if (this.webnnCpuSession) {
+        this.session = this.webnnCpuSession;
+        return;
+      }
+      this.modelLoading = true;
+      this.modelInitializing = true;
+    }
 
     try {
       if (this.sessionBackend === "webgl") {
@@ -258,14 +278,24 @@ export default class WebcamModelUI extends Vue {
       } else if (this.sessionBackend === "wasm") {
         this.cpuSession = await runModelUtils.createModelCpu(this.modelFile);
         this.session = this.cpuSession;
+      } else if (this.sessionBackend === "webnn_gpu") {
+        this.webnnGpuSession = await runModelUtils.createModelWebnn(this.modelFile, 1);
+        this.session = this.webnnGpuSession;
+      } else if (this.sessionBackend === "webnn_cpu") {
+        this.webnnCpuSession = await runModelUtils.createModelWebnn(this.modelFile, 2);
+        this.session = this.webnnCpuSession;
       }
     } catch (e) {
       this.modelLoading = false;
       this.modelInitializing = false;
       if (this.sessionBackend === "webgl") {
         this.gpuSession = undefined;
-      } else {
+      } else if (this.sessionBackend === "wasm") {
         this.cpuSession = undefined;
+      } else if (this.sessionBackend === "webnn_gpu") {
+        this.webnnGpuSession = undefined;
+      } else if (this.sessionBackend === "webnn_cpu") {
+        this.webnnCpuSession = undefined;
       }
       throw new Error("Error: Backend not supported. ");
     }
