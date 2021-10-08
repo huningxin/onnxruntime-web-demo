@@ -1,3 +1,4 @@
+import 'webnn-polyfill';
 import '@babel/polyfill';
 import 'whatwg-fetch';
 import 'vuetify/dist/vuetify.min.css';
