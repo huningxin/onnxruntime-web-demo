@@ -4,12 +4,12 @@ declare module 'blueimp-load-image' {
 }
 
 declare module 'ndarray-gemm' {
-import {NdArray} from 'NdArray';
+import {NdArray} from 'ndarray';
   export default function matrixProduct(c: NdArray, a: NdArray, b: NdArray, alpha?: number, beta?: number): void;
 }
 
 declare module 'ndarray-ops' {
-import {NdArray, Data} from 'NdArray';
+import {NdArray, Data} from 'ndarray';
   export function assign(dest: NdArray, src: NdArray): NdArray;
   export function assigns(dest: NdArray, val: Data): NdArray;
 
