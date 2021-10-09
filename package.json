@@ -17,11 +17,12 @@
     "ndarray-resample": "^1.0.1",
     "ndarray-squeeze": "^1.0.2",
     "ndarray-unpack": "^1.0.0",
-    "onnxruntime-web": "1.8.0-dev.20210708.0",
+    "onnxruntime-web": "file:libs/onnxruntime-web/js/web",
     "vue": "^2.6.14",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.5.2",
+    "webnn-polyfill": "file:libs/webnn-polyfill",
     "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
