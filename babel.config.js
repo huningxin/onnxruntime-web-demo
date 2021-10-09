@@ -1,3 +1,7 @@
 module.exports = {
-  presets: [["@vue/app", { useBuiltIns: "entry" }]]
+  presets: [["@vue/app", { useBuiltIns: "entry" }]],
+  exclude: [
+    /webnn-polyfill/,
+    /onnxruntime-web/
+  ]
 }
