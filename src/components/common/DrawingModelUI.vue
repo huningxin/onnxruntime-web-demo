@@ -189,6 +189,7 @@ export default class DrawingModelUI extends Vue {
     }
     if (this.sessionBackend === "webnn_gpu") {
       if (this.webnnGpuSession) {
+        await runModelUtils.setWebnnPolyfillBackend(1);
         this.session = this.webnnGpuSession;
         return;
       }
@@ -197,6 +198,7 @@ export default class DrawingModelUI extends Vue {
     }
     if (this.sessionBackend === "webnn_cpu") {
       if (this.webnnCpuSession) {
+        await runModelUtils.setWebnnPolyfillBackend(2);
         this.session = this.webnnCpuSession;
         return;
       }
