@@ -26,7 +26,9 @@ function createWindow() {
     show: false,
     webPreferences: {
       webgl: true,
-      nodeIntegration: false
+      nodeIntegration: true,
+      contextIsolation: false,
+      preload: path.join(__dirname, 'webnn_setup.js')
     }
   });
 
