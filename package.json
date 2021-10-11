@@ -8,9 +8,12 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target app",
     "electron": "electron .",
-    "electron-packager": "electron-packager . ONNXRuntimeWeb-demo --win32 --ignore=\"/(src|types|public|node_modules)\""
+    "electron-packager": "electron-packager . ONNXRuntimeWeb-demo --win32 --ignore=\"/(libs|src|types|public)\""
   },
   "dependencies": {
+    "webnn-node": "file:libs/webnn-native/node"
+  },
+  "devDependencies": {
     "@babel/polyfill": "^7.12.1",
     "ndarray": "^1.0.19",
     "ndarray-ops": "^1.2.2",
@@ -22,11 +25,6 @@
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.5.2",
-    "webnn-node": "file:libs/webnn-native/node",
-    "webnn-polyfill": "file:libs/webnn-polyfill",
-    "whatwg-fetch": "^3.6.2"
-  },
-  "devDependencies": {
     "@types/lodash": "^4.14.172",
     "@types/long": "^4.0.1",
     "@types/ndarray": "^1.0.10",
@@ -51,7 +49,9 @@
     "vue-template-compiler": "^2.6.14",
     "vuetify": "^1.5.13",
     "webpack": "^4.46.0",
-    "webpack-cli": "^4.7.2"
+    "webpack-cli": "^4.7.2",
+    "webnn-polyfill": "file:libs/webnn-polyfill",
+    "whatwg-fetch": "^3.6.2"
   },
   "postcss": {
     "plugins": {
