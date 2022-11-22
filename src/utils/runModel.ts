@@ -21,9 +21,9 @@ export async function createModelWebnn(model: ArrayBuffer, devicePreference: num
 export async function setWebnnPolyfillBackend(devicePreference: number = 0): Promise<void> {
   if ((navigator as any).ml) {
     const ml = (navigator as any).ml;
-    if (ml.createContext().tf) {
+    if (ml.createContextSync().tf) {
       // Set backend if using webnn-polyfill
-      const tf = (navigator as any).ml.createContext().tf;
+      const tf = (navigator as any).ml.createContextSync().tf;
       if (devicePreference === 1) {
         await tf.setBackend('webgl');
       } else {

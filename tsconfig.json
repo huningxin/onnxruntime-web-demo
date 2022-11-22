@@ -15,7 +15,7 @@
           "dom", 
           "esnext",
           "dom.iterable",
-          "scripthost", 
+          "scripthost"
       ],
       "declarationDir": "./types",
       "noUnusedLocals": true,

@@ -8,15 +8,51 @@ module.exports = {
       }
     }
   },
+  parallel: false,
   publicPath: process.env.NODE_ENV === 'production' ? '/onnxruntime-web-demo/' : '/',
   outputDir: 'docs',
-  configureWebpack: config => {
+  configureWebpack: () => {
+    let configs = {
+      module: {
+        rules: [
+          {
+            test: /\.worker\.ts$/,
+            use: {
+              loader: "worker-loader",
+              options: {
+                inline: "no-fallback",
+              }
+            }
+          },
+          {
+          
+            test: /\.worker\.ts$/,
+            use: [
+              {
+                loader: 'ts-loader'
+              }
+            ],
+            exclude: /node_modules/
+          }
+        ]
+      },  
+      resolve: {
+        extensions: [".ts", ".js"],
+      },
+    };
     if (process.env.NODE_ENV === 'production') {
-      config.node = {
+      configs.node = {
         __dirname: false,
         __filename: false
       }
     }
-  }
+    return configs
+  },
+  devServer: {
+    headers: {
+      "Cross-Origin-Embedder-Policy": 'require-corp',
+      'Cross-Origin-Opener-Policy': 'same-origin'
+    }
+  },
 }
 
